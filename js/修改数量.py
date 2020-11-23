@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# author:洪卫
+import os
+import tkinter as tk  # 使用Tkinter前需要先导入
+ 
+# 第1步，实例化object，建立窗口window
+window = tk.Tk()
+ 
+# 第2步，给窗口的可视化起名字
+window.title('修改数量')
+ 
+# 第3步，设定窗口的大小(长 * 宽)
+window.geometry('500x500')  # 这里的乘是小x
+ 
+# 第4步，在图形界面上创建一个标签label用以显示并放置
+# var1 = tk.StringVar()  # 创建变量，用var1用来接收鼠标点击具体选项的内容
+# l = tk.Label(window, bg='green', fg='yellow',font=('Arial', 12), width=10, textvariable=var1)
+# l.pack()
+ 
+
+
+def delLastLine():
+  # 删除最后一行
+  with open('member.js', "rb+") as f:
+      lines = f.readlines()  # 读取所有行
+      last_line = lines[-1]  # 取最后一行
+      for i in range(len(last_line) + 2):
+          f.seek(-1, os.SEEK_END)
+          f.truncate()
+  return
+ 
+
+def write_js(value):
+  # 删除最后一行
+    # delLastLine()
+    # 增加逗号
+
+    f= open("member.js","w+")
+    f.write('var member = [')
+    for i in range(value -1):
+         f.write(
+'''
+{
+    "phone": "",
+    "name": "%d"
+  },
+'''
+     % (i+1))
+    f.write(
+'''
+{
+    "phone": "",
+    "name": "%d"
+  }
+]
+'''
+     % (value))
+    f.close()
+
+    '''
+  var member = [
+  {
+    "phone": "",
+    "name": "1"
+  },
+  {
+    "phone": "",
+    "name": "2"
+  },
+  {
+    "phone": "",
+    "name": "3"
+  },
+  {
+    "phone": "",
+    "name": "44"
+  }
+]
+'''
+
+# 第6步，创建一个方法用于按钮的点击事件
+def print_selection():
+    write_js(int(e2.get()))
+    # list_items = []
+    # for item in range(int(e2.get())):
+    #     lb.insert('end', item + 1)  # 从最后一个位置开始加入值
+    # value = lb.get(lb.curselection())   # 获取当前选中的文本
+    # var1.set(value)  # 为label设置值
+ 
+
+
+e2 = tk.Entry(window, show=None, font=('Arial', 50))
+e2.pack()
+
+# 第5步，创建一个按钮并放置，点击按钮调用print_selection函数
+b1 = tk.Button(window, text='确认写入JS文件', width=15, height=5, command=print_selection)
+b1.pack()
+# 第7步，创建Listbox并为其添加内容
+# var2 = tk.StringVar()
+# var2.set(()) # 为变量var2设置值
+# 创建Listbox
+# sb = tk.Scrollbar(window)
+# sb.pack(side="right", fill="y")
+# lb = tk.Listbox(window, yscrollcommand = sb.set)  #将var2的值赋给Listbox
+# 创建一个list并将值循环添加到Listbox控件中
+
+# lb.insert(1, 'first')       # 在第一个位置加入'first'字符
+# lb.insert(2, 'second')      # 在第二个位置加入'second'字符
+# lb.delete(2)                # 删除第二个位置的字符
+# lb.pack()
+ 
+# 第8步，主窗口循环显示
+window.mainloop()
