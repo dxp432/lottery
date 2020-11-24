@@ -24,8 +24,8 @@
         }
         .result span {
             display: inline-block;
-            font-size: 25px;
-            width: 190px;
+            font-size: 20px;
+            width: 150px;
             background: #fff;
             line-height: 30px;
             color: #000;
@@ -177,7 +177,7 @@
             member.forEach(function(item, index){
                 item.index = index;
                 var key = getKey(item);
-                var color = choosed[key] ? 'yellow' : 'red';
+                var color = choosed[key] ? 'yellow' : 'white';
                 html.push('<li><a href="#" style="color: ' + color + ';">' + item.name + '</a></li>');
             });
             html.push('</ul>');
@@ -228,7 +228,7 @@
                     textColour: null,
                     initial: speed(),
                     dragControl: 1,
-                    textHeight: 30
+                    textHeight: 15
                 });
             },
             methods: {
